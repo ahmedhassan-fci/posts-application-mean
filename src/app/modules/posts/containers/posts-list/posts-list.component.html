@@ -1,0 +1,117 @@
+<div class="max-w-3xl mx-auto px-0 sm:px-4 sm:px-6 lg:max-w-7xl lg:px-8" *ngIf="authService.getIsAuth()">
+  <ng-container *ngIf="posts && posts.length">
+    <div class="w-full py-4 px-8 bg-white shadow-lg rounded-lg my-20" *ngFor="let post of posts">
+      <div class="flex justify-center md:justify-end -mt-16">
+        <img class="w-20 h-20 object-cover rounded p-4 border-2 border-indigo-500" PostsDefaultImage alt=""
+          [src]="post.imagePath">
+      </div>
+      <div>
+        <h2 class="text-gray-800 text-3xl font-semibold flex">
+          {{ post?.title }}
+          <ng-container *ngIf="authService.getUserId() === post?.creator?.id">
+            <div class="flex items-center space-x-3 ml-3">
+              <a [routerLink]="['/edit-post', post?.id]">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round"
+                  class="w-4 text-blue-600 hover:text-blue-900 cursor-pointer" viewBox="0 0 24 24">
+                  <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                </svg>
+              </a>
+              <svg (click)="onDelete(post.id)" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+                stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="w-4 text-red-500 hover:text-red-900 cursor-pointer" viewBox="0 0 24 24">
+                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+              </svg>
+            </div>
+          </ng-container>
+        </h2>
+        <p class="mt-2 text-gray-600">
+          {{ post?.content }}
+        </p>
+      </div>
+      <div class="flex justify-end mt-4">
+        <a class="text-xl font-medium text-indigo-500">{{ post?.creator?.name }}</a>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!posts || !posts.length">
+    <div class="w-full py-4 px-8 bg-white shadow-lg rounded-lg my-20 opacity-30">
+      <div class="flex justify-center md:justify-end -mt-16">
+        <img class="w-20 h-20 object-cover rounded p-4 border-2 border-indigo-500" alt="" [src]="defaultPostImg">
+      </div>
+      <div>
+        <h2 class="text-gray-800 text-3xl font-semibold">Post title</h2>
+        <p class="mt-2 text-gray-600">
+          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+          standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+          make
+          a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+          remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+          containing
+          Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including
+          versions
+          of Lorem Ipsum.
+        </p>
+      </div>
+      <div class="flex justify-end mt-4">
+        <a class="text-xl font-medium text-indigo-500">Ahmed Hassan</a>
+      </div>
+    </div>
+
+    <div class="bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-500 px-4 py-3 shadow-md" role="alert">
+      <div class="flex">
+        <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20">
+            <path
+              d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+          </svg></div>
+        <div>
+          <p class="font-bold">Notification message </p>
+          <p class="text-sm">There is no posts now, Be the first one to
+            <a routerLink="/create-post" class="text-blue-600 text-sm bold">Create post</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</div>
+
+<div class="max-w-3xl mx-auto px-0 sm:px-4 sm:px-6 lg:max-w-7xl lg:px-8" *ngIf="!authService.getIsAuth()">
+  <div class="w-full py-4 px-8 bg-white shadow-lg rounded-lg my-20 opacity-30">
+    <div class="flex justify-center md:justify-end -mt-16">
+      <img class="w-20 h-20 object-cover rounded p-4 border-2 border-indigo-500" alt="" [src]="defaultPostImg">
+    </div>
+    <div>
+      <h2 class="text-gray-800 text-3xl font-semibold">Post title</h2>
+      <p class="mt-2 text-gray-600">
+        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
+        a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
+        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
+        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
+        of Lorem Ipsum.
+      </p>
+    </div>
+    <div class="flex justify-end mt-4">
+      <a class="text-xl font-medium text-indigo-500">Ahmed Hassan</a>
+    </div>
+  </div>
+
+  <div class="bg-blue-100 border-t-4 border-blue-500 rounded-b text-blue-500 px-4 py-3 shadow-md" role="alert">
+    <div class="flex">
+      <div class="py-1"><svg class="fill-current h-6 w-6 text-teal-500 mr-4" xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20">
+          <path
+            d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm12.73-1.41A8 8 0 1 0 4.34 4.34a8 8 0 0 0 11.32 11.32zM9 11V9h2v6H9v-4zm0-6h2v2H9V5z" />
+        </svg></div>
+      <div>
+        <p class="font-bold">Notification message </p>
+        <p class="text-sm">In order to show the posts, you have to
+          <a routerLink="/login" class="text-blue-600 text-sm">Login</a> or
+          <a routerLink="/register" class="text-blue-600 text-sm">Create new account</a> first.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

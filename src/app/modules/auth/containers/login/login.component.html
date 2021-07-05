@@ -1,0 +1,46 @@
+<div class="font-sans">
+  <div class="relative mt-32 flex flex-col sm:justify-center items-center">
+    <div class="relative sm:max-w-sm w-full">
+      <div class="card bg-blue-400 shadow-lg w-full h-full rounded-3xl absolute transform -rotate-6"></div>
+      <div class="card bg-red-400 shadow-lg w-full h-full rounded-3xl absolute transform rotate-6"></div>
+      <div class="relative w-full rounded-3xl  px-6 py-4 bg-gray-100 shadow-md">
+        <label class="block mt-3 text-sm text-gray-700 text-center font-semibold">
+          Login
+        </label>
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm)" class="mt-10">
+          <div>
+            <input type="email" placeholder="Email address" email formControlName="email"
+              class="px-5 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:outline-none focus:ring-0">
+            <div *ngIf="email?.invalid && email?.touched" class="text-red-700 text-sm mt-2">
+              Your email is <strong>Required</strong>
+            </div>
+          </div>
+
+          <div class="mt-7">
+            <input type="password" placeholder="Password" formControlName="password"
+              class="px-5 mt-1 block w-full border-none bg-gray-100 h-11 rounded-xl shadow-lg hover:bg-blue-100 focus:bg-blue-100 focus:outline-none focus:ring-0">
+            <div *ngIf="password?.invalid && password?.touched" class="text-red-700 text-sm mt-2">
+              Your password is <strong>Required</strong>
+            </div>
+          </div>
+
+          <div class="mt-7">
+            <posts-button-submit [form]="loginForm" [isLoading]="isLoading">
+              Sign in
+            </posts-button-submit>
+          </div>
+
+          <div class="mt-7">
+            <div class="flex justify-center items-center">
+              <label class="mr-2 text-sm">Can't access your account</label>
+              <a routerLink="/forget-password"
+                class="text-blue-500 transition duration-500 ease-in-out transform hover:-translate-x hover:scale-105 text-base">
+                Forget your password
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

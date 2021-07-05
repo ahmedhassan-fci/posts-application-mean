@@ -1,0 +1,24 @@
+<nav
+  class="font-sans flex flex-col text-center content-center sm:flex-row sm:text-left sm:justify-between py-2 px-6 bg-white shadow-md sm:items-baseline w-full">
+  <div class="mb-2 sm:mb-0 inner">
+    <a routerLink="/"
+      class="text-2xl no-underline text-grey-darkest hover:text-blue-dark font-sans font-bold">Posts</a><br>
+    <span class="text-xs text-grey-dark">Beautiful New Posts</span>
+  </div>
+
+  <div class="sm:mb-0 self-center">
+    <ng-container *ngIf="!authService.getIsAuth()">
+      <a routerLink="/login" routerLinkActive="text-blue-600"
+        class="text-md no-underline text-black hover:text-blue-dark ml-2 px-1">Login</a>
+      <a routerLink="/signup" routerLinkActive="text-blue-600"
+        class="text-md no-underline text-grey-darker hover:text-blue-dark ml-2 px-1">Sign up</a>
+    </ng-container>
+
+    <ng-container *ngIf="authService.getIsAuth()">
+      <a routerLink="/create-post" routerLinkActive="text-blue-600"
+        class="text-md no-underline text-grey-darker hover:text-blue-dark ml-2 px-1">New Post</a>
+      <a (click)="onLogout()"
+        class="cursor-pointer text-md no-underline text-grey-darker hover:text-blue-dark ml-2 px-1">Logout</a>
+    </ng-container>
+  </div>
+</nav>

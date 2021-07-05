@@ -1,0 +1,8 @@
+{
+  "env": {
+    "MONGO_USER": "ahmed_viber",
+    "MONGO_ATLAS": "Beta",
+    "MONGO_ATLAS_PW": "ojT59CNueiGhYw1Z",
+    "JWT_KEY": "ahmed_viber_mean_stack_developer"
+  }
+}

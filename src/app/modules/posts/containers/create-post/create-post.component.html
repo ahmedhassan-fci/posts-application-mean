@@ -1,0 +1,61 @@
+<div class="max-w-3xl mx-auto px-0 sm:px-4 sm:px-6 lg:max-w-7xl lg:px-8">
+  <div class="sm:max-w-lg w-full p-10 bg-white rounded-xl z-10 m-auto mt-5">
+    <div class="text-center">
+      <h2 class="mt-5 text-3xl font-bold text-gray-900">
+        {{ isEditPost ? 'Edit post': 'Create new post' }}
+      </h2>
+      <p class="mt-2 text-sm text-gray-400">Lorem ipsum is placeholder text.</p>
+    </div>
+    <form class="mt-8 space-y-3" [formGroup]="postForm" (ngSubmit)="onSavePost(postForm)">
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">Title</label>
+        <input class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          type="text" placeholder="Post title" formControlName="title">
+        <div *ngIf="title?.invalid && title?.touched" class="text-red-700 text-sm mt-2">
+          Post title is <strong>Required</strong>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">Content</label>
+        <textarea class="text-base p-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+          placeholder="Post content" formControlName="content"></textarea>
+        <div *ngIf="content?.invalid && content?.touched" class="text-red-700 text-sm mt-2">
+          Post content is <strong>Required</strong>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 space-y-2">
+        <label class="text-sm font-bold text-gray-500 tracking-wide">Attach Document</label>
+        <div class="flex items-center justify-center w-full">
+          <label
+            class="flex flex-col rounded-lg border-4 border-dashed w-full h-60 p-10 group text-center cursor-pointer"
+            (click)="filePicker.click()">
+            <div class="h-full w-full text-center flex flex-col items-center justify-center items-center">
+              <div class="flex flex-auto max-h-48 w-2/5 mx-auto -mt-10">
+                <img class="has-mask absolute h-36 object-center"
+                  src="https://img.freepik.com/free-vector/image-upload-concept-landing-page_52683-27130.jpg?size=338&ext=jpg"
+                  alt="freepik image">
+              </div>
+              <p class="pointer-none text-gray-500">
+                <span class="text-sm">Drag and drop</span> files here <br /> or
+                <a class="text-blue-600 hover:underline">select a file</a>
+                from your computer</p>
+            </div>
+          </label>
+          <input type="file" class="hidden" #filePicker (change)="onImagePicked($event)">
+        </div>
+      </div>
+      <div *ngIf="imagePreview">
+        <img [src]="imagePreview" class="w-32 h-32 object-cover rounded p-4 border-2 border-indigo-500" [alt]=""
+          PostsDefaultImage>
+      </div>
+      <p class="text-sm text-gray-300">
+        <span>File type: png, jpg, jpeg of images</span>
+      </p>
+      <div>
+        <posts-button-submit [form]="postForm" [isLoading]="isLoading">
+          {{ isEditPost ? 'Edit post': 'Create new post' }}
+        </posts-button-submit>
+      </div>
+    </form>
+  </div>
+</div>
